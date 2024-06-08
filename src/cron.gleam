@@ -106,3 +106,13 @@ fn includes(field, value: Int) {
 
 @external(erlang, "erlang", "universaltime")
 fn utc_datetime() -> #(#(Int, Int, Int), #(Int, Int, Int))
+
+@external(erlang, "cron_ffi", "unix")
+fn unix() -> Int
+
+// Returns the number of seconds until the next minute
+pub fn seconds_to_next_minute() {
+  let now = unix()
+  let next = { { now / 60 } + 1 } * 60
+  next - now
+}
